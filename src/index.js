@@ -1,13 +1,50 @@
-import { body } from "msw/lib/types/context";
+// import { body } from "msw/lib/types/context";
 import "./less/index.less";
 
 const header = document.querySelector(".main-navigation");
 const funBusLogo = document.querySelector(".logo-heading");
 const navLinks = document.querySelectorAll(".nav-link");
 const images = document.querySelectorAll("img");
-const body1 = document.querySelector("body");
+const body = document.querySelector("body");
+const middleHeadings = document.querySelectorAll("h2");
+const bottomHeadings = document.querySelectorAll("h4");
+const paragraphs = document.querySelectorAll("div p");
 
 let isDarkMode = false;
+const dMState = {
+  d: false,
+  m: false,
+};
+
+function checkDMState() {
+  if (dMState.d && dMState.m) {
+    darkMode();
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  console.log(e);
+
+  if (e.key === "d") {
+    dMState.d = true;
+    checkDMState();
+  } else if (e.key === "m") {
+    dMState.m = true;
+    checkDMState();
+  }
+});
+
+document.addEventListener("keyup", (e) => {
+  console.log(e);
+
+  if (e.key === "d") {
+    dMState.d = false;
+    checkDMState();
+  } else if (e.key === "m") {
+    dMState.m = false;
+    checkDMState();
+  }
+});
 
 header.addEventListener("dblclick", darkMode);
 
@@ -38,17 +75,66 @@ function darkMode() {
   isDarkMode = !isDarkMode;
 
   if (isDarkMode) {
-    this.style.backgroundColor = "#282828";
-    body1.style.backgroundColor = "#282828";
+    header.style.backgroundColor = "#282828";
+    body.style.backgroundColor = "#282828";
+
+    funBusLogo.style.color = "white";
 
     navLinks.forEach((link) => {
       link.style.color = "white";
     });
+
+    middleHeadings.forEach((midHead) => {
+      midHead.style.color = "white";
+    });
+
+    bottomHeadings.forEach((bottomHead) => {
+      bottomHead.style.color = "white";
+    });
+
+    paragraphs.forEach((p) => {
+      p.style.color = "white";
+    });
+
+    images.forEach((img) => {
+      img.addEventListener("mouseover", (e) => {
+        e.target.style.border = "3px dotted white";
+      });
+
+      img.addEventListener("mouseout", (e) => {
+        e.target.style.border = "";
+      });
+    });
   } else {
-    this.style.backgroundColor = "";
+    header.style.backgroundColor = "";
+    body.style.backgroundColor = "";
+
+    funBusLogo.style.color = "black";
 
     navLinks.forEach((link) => {
       link.style.color = "black";
+    });
+
+    middleHeadings.forEach((midHead) => {
+      midHead.style.color = "black";
+    });
+
+    bottomHeadings.forEach((bottomHead) => {
+      bottomHead.style.color = "black";
+    });
+
+    paragraphs.forEach((p) => {
+      p.style.color = "black";
+    });
+
+    images.forEach((img) => {
+      img.addEventListener("mouseover", (e) => {
+        e.target.style.border = "3px dotted black";
+      });
+
+      img.addEventListener("mouseout", (e) => {
+        e.target.style.border = "";
+      });
     });
   }
 }
