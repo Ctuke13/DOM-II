@@ -139,20 +139,27 @@ function darkMode() {
   }
 }
 
+let isRainbow = false;
+
 function rainbowText(e) {
   e.stopPropagation();
-  const funBusText = Array.from(funBusLogo.textContent.trim());
-  let modifiedText = "";
+  isRainbow = !isRainbow;
+  if (isRainbow === true) {
+    const funBusText = Array.from(funBusLogo.textContent.trim());
+    let modifiedText = "";
 
-  modifiedText += wrapInSpan(funBusText[0], "red");
-  modifiedText += wrapInSpan(funBusText[1], "orange");
-  modifiedText += wrapInSpan(funBusText[2], "yellow");
-  modifiedText += funBusText[3];
-  modifiedText += wrapInSpan(funBusText[4], "green");
-  modifiedText += wrapInSpan(funBusText[5], "blue");
-  modifiedText += wrapInSpan(funBusText[6], "indigo");
+    modifiedText += wrapInSpan(funBusText[0], "red");
+    modifiedText += wrapInSpan(funBusText[1], "orange");
+    modifiedText += wrapInSpan(funBusText[2], "yellow");
+    modifiedText += funBusText[3];
+    modifiedText += wrapInSpan(funBusText[4], "green");
+    modifiedText += wrapInSpan(funBusText[5], "blue");
+    modifiedText += wrapInSpan(funBusText[6], "indigo");
 
-  funBusLogo.innerHTML = modifiedText;
+    funBusLogo.innerHTML = modifiedText;
+  } else {
+    funBusLogo.style.color = "black";
+  }
 }
 
 function wrapInSpan(text, color) {
